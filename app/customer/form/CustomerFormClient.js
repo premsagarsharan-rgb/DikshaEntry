@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import DevoteeForm from "@/components/DevoteeForm";
+import DevoteeForm from "../../../components/DevoteeForm.js";
 
 export default function CustomerFormClient() {
   const sp = useSearchParams();
