@@ -1,0 +1,21 @@
+{{fullName}}
+{{relation}}
+{{relationName}}
+{{gender}}
+{{maritalStatus}}
+{{address}}
+{{country}}
+{{state}}
+{{city}}
+{{profession}}
+{{mobileNumber}}
+{{whatsappNumber}}
+{{idType}}
+{{idNumber}}
+{{printedOn}
+
+
+
+{{#family}}
+Name: {{name}}  Relation: {{relation}}  Mobile: {{mobileNumber}}
+{{/family}}

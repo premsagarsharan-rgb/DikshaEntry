@@ -1,2 +1,0 @@
-# DikshaEntry
-Bla
