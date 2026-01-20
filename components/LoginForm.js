@@ -31,7 +31,7 @@ export default function LoginForm({ role }) {
 
       <div className="mt-4 space-y-3">
         <input className="w-full rounded-xl bg-zinc-950 border border-zinc-800 p-3"
-          placeholder="User ID"
+          placeholder="Admin ID"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
         />
