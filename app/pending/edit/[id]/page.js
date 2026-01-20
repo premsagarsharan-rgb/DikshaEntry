@@ -28,15 +28,23 @@ export default function PendingEditPage() {
 
   function saveToLocalStorage(data) {
     localStorage.setItem(lsKey(id), JSON.stringify(data));
-    alert("Saved to LocalStorage. Ab Submit button se final kar sakte ho.");
-    router.push("/user");
+    alert("Saved ✔️  Ab Recent Pending se Submit karo");
+    router.push("/user"); // modal wahi open hota hai
   }
 
   return (
     <main className="min-h-screen p-6 max-w-5xl mx-auto">
       <TopBar title={`Edit Pending: ${id}`} />
-      {msg ? <div className="text-red-400">{msg}</div> : null}
-      {doc ? <DevoteeForm initialData={doc} onSave={saveToLocalStorage} saveLabel="Save (LocalStorage)" /> : null}
+
+      {msg && <div className="text-red-400">{msg}</div>}
+
+      {doc && (
+        <DevoteeForm
+          initialData={doc}
+          onSave={saveToLocalStorage}
+          saveLabel="Save (LocalStorage)"
+        />
+      )}
     </main>
   );
 }

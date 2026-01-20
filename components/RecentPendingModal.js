@@ -73,15 +73,12 @@ export default function RecentPendingModal({ open, onClose }) {
       return;
     }
 
-    // ✅ SUCCESS: response is DOCX
     const blob = await r.blob();
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement("a");
     a.href = url;
     a.download = "print.docx";
     a.click();
-
     URL.revokeObjectURL(url);
 
     localStorage.removeItem(lsKey(id));
@@ -101,22 +98,54 @@ export default function RecentPendingModal({ open, onClose }) {
         {msg && <div className="text-red-400 mt-3">{msg}</div>}
 
         <div className="mt-4 grid gap-3">
-          {items.map((it) => (
-            <div key={it._id} className="rounded-xl border p-4">
-              <div className="font-semibold">{it.fullName}</div>
-              <div className="text-sm text-zinc-400">
-                Mobile: {it.mobileNumber}
-              </div>
+          {items.map((it) => {
+            const isSaved = !!localStorage.getItem(lsKey(it._id));
 
-              <div className="mt-3 flex gap-2">
-                <button onClick={() => router.push(`/pending/edit/${it._id}`)}>
-                  Edit
-                </button>
-                <button onClick={() => reject(it._id)}>Reject</button>
-                <button onClick={() => submit(it._id)}>Submit</button>
+            return (
+              <div
+                key={it._id}
+                className={`rounded-xl border p-4 transition
+                  ${
+                    isSaved
+                      ? "border-green-500 bg-green-500/5"
+                      : "border-zinc-700"
+                  }`}
+              >
+                <div className="font-semibold">{it.fullName}</div>
+                <div className="text-sm text-zinc-400">
+                  Mobile: {it.mobileNumber}
+                </div>
+
+                <div className="mt-3 flex gap-2">
+                  <button
+                    onClick={() => router.push(`/pending/edit/${it._id}`)}
+                    className="px-3 py-1 rounded bg-zinc-800"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => reject(it._id)}
+                    className="px-3 py-1 rounded bg-red-600/80"
+                  >
+                    Reject
+                  </button>
+
+                  <button
+                    onClick={() => submit(it._id)}
+                    className={`px-3 py-1 rounded font-semibold
+                      ${
+                        isSaved
+                          ? "bg-green-600 text-white"
+                          : "bg-zinc-700 text-zinc-300"
+                      }`}
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {!items.length && (
             <div className="text-zinc-400 text-sm">
